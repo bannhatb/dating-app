@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">DATING APP</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/members">Members</a>
+                </li>
+            </ul>
+            <form class="d-flex" *ngIf="!(accountService.currentUser$ | async)">
+                <input class="form-control me-2" type="text" placeholder="Username" name="Username" [(ngModel)]="authUser.username" />
+                <input class="form-control me-2" type="password" placeholder="Password" name="Password" [(ngModel)]="authUser.password" />
+                <button class="btn btn btn-outline-success" type="button" (click)="login()"> Login </button>
+            </form>
+            <ul class="d-flex navbar-nav mb-2 mb-lg-0" *ngIf="accountService.currentUser$ | async">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Hi, {{ (accountService.currentUser$ | async)?.username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" (click)="accountService.logout()"> Logout </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
